@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- Bootstrap CSS -->
+   
+    <title>Draggable Divder</title>
+  </head>
+  <body>
+    <div class="p-1">Draggable Divider</div>
+    <div class="left_box p-5">
+        <h1>Draggable Divider Demo with JQuery</h1>
+        <p>
+          Try dragging the divder between two sections. 
+        </p>
+    </div> 
+    <div class="dragBar" id="dragBar"></div>
+    <div class="right_box text-white p-4">
+      <h2>Dummy Text</h2>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis placeat maiores veritatis at iste, deleniti, sit, numquam est suscipit quam sequi alias unde enim neque quos voluptates culpa ullam voluptatem.
+        Id dicta consectetur dolorum ea impedit exercitationem cupiditate, laudantium, necessitatibus sed repellat fugit rem. Illum nisi, corrupti repellat blanditiis voluptatibus a incidunt reprehenderit quae, voluptate impedit et beatae eaque ratione?
+        Dicta, temporibus autem? Doloremque maiores reiciendis ratione, neque sed tenetur libero ducimus eos laborum deleniti eveniet consectetur, minus dolor fugit animi? Expedita hic omnis iusto quidem asperiores minus. Quidem, pariatur.
+        Commodi facere quibusdam asperiores earum cumque atque provident minus hic maxime, dignissimos cupiditate necessitatibus soluta porro nemo officia deserunt quo quas eum deleniti distinctio iste unde similique ut officiis. Expedita.
+        Error eligendi odit minus similique neque laudantium, quidem possimus officia asperiores cum ullam! Reprehenderit, facere sed? Amet cumque eligendi odio voluptatibus, deserunt neque ducimus, quibusdam vel hic dolorem quos autem!
+      </p>
+     
+
+
+    </div>
+
+    <style>
+      .left_box, .right_box, .dragBar{
+        position:fixed;
+        overflow:auto;
+      }
+
+      .dragBar{
+        width:5px;
+        background-color:darkgrey;;
+        top:30px; 
+        bottom:0px;
+        left:80%;
+        z-index:1000;
+        cursor: ew-resize;
+
+
+      }
+      .left_box{
+        top:30px; 
+        bottom:0px;
+        left:0px;
+        background-color:#EEE;
+        right :20%;
+      }
+      .right_box{
+        top:30px;
+        bottom:0px;
+        right:0px;
+        left:80%;
+        background-color:black;
+      }
+    </style>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script>  
+        $(function(){
+
+
+          $('#dragBar').on('doubleclick', function(e)
+          {
+            $('.dragBar').css({
+               left : (( initialized.x + e.pageX )-2) + 'px',
+            }); 
+            $('.right_box').css({
+                 left : ( initialized.x + e.pageX ) + 'px',
+                 // height : ($(window).height()-top ) + 'px'
+            });    
+            $('.left_box').css({
+               right : ($(window).width()-( initialized.x + e.pageX )) + 'px',
+            });
+
+          });
+
+
+          $('#dragBar').on('mousedown', function(e){
+          var node = $(this);
+          var position = node.offset();
+          var initialized = {
+              x : position.left - e.pageX,
+              y : position.top - e.pageY
+          };
+    var handlers = {
+        mousemove : function(e){
+
+          $('.dragBar').css({
+               left : (( initialized.x + e.pageX )-2) + 'px',
+               // height : ($(window).height()-top ) + 'px'
+            }); 
+
+          $('.right_box').css({
+               left : ( initialized.x + e.pageX ) + 'px',
+               // height : ($(window).height()-top ) + 'px'
+            });    
+
+          $('.left_box').css({
+               right : ($(window).width()-( initialized.x + e.pageX )) + 'px',
+               // height : ($(window).height()-top ) + 'px'
+            });
+        },
+        mouseup : function(e){
+            $(this).off(handlers);   
+             $('.chat-style,.builder-body,.language-textarea').removeClass("notransition");
+        }
+    };
+    $(document).on(handlers);
+});
+
+
+
+
+        });
+
+    </script>
+  </body>
+</html>
